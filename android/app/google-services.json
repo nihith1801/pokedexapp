@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1034035244293",
+    "project_id": "pokedexflutter-3d266",
+    "storage_bucket": "pokedexflutter-3d266.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034035244293:android:d94943497cb4e4d07edb6c",
+        "android_client_info": {
+          "package_name": "com.example.pokedexapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmWrTO948jn757LMzmLMItIu4WhrC8vZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
