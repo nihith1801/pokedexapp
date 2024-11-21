@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pokedexapp/components/my_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -9,7 +8,7 @@ class LoginForm extends StatefulWidget {
   final TextEditingController usernameController;
   final TextEditingController passwordController;
 
-  LoginForm({
+  const LoginForm({super.key, 
     required this.usernameController,
     required this.passwordController,
   });
@@ -56,7 +55,7 @@ class _LoginFormState extends State<LoginForm> {
                 onTap: () {
                   // Add functionality here
                 },
-                child: Text(
+                child: const Text(
                   'Forgot Password?',
                   style: TextStyle(
                     color: Colors.black38,

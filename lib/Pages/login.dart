@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pokedexapp/components/image_tile.dart';
-import '../components/mytextfield.dart';
 import '../components/rive_background.dart';
 import '../components/login_form.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -26,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.blueGrey[300],
         body: Stack(
           children: [
-            RiveBackground(),
+            const RiveBackground(),
             SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
@@ -60,9 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.blueGrey[300],
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                                  EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text('Or continue with',
                                   style: TextStyle(color: Colors.black26)),
                             ),
@@ -92,12 +91,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 5,
                                   blurRadius: 7,
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 3), // changes position of shadow
                                 ),
                               ],
                             ),
-                            child: Row(
+                            child: const Row(
                               //mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Flexible(
@@ -135,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: LoginScreen(),
   ));
 }

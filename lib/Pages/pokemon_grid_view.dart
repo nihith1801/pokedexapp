@@ -3,10 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../components/pokemon_card.dart';
 import '../components/pokemon_detail_screen.dart';
-import '../utils/string_utils.dart';
 
 class PokemonGridView extends StatefulWidget {
-  const PokemonGridView({Key? key}) : super(key: key);
+  const PokemonGridView({super.key});
 
   @override
   _PokemonGridViewState createState() => _PokemonGridViewState();

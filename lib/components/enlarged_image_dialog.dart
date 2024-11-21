@@ -4,8 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 class EnlargedImageDialog extends StatelessWidget {
   final String imageUrl;
 
-  const EnlargedImageDialog({Key? key, required this.imageUrl})
-      : super(key: key);
+  const EnlargedImageDialog({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

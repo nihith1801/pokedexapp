@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pokedexapp/Pages/auth_page.dart';
-import 'firebase_options.dart';
-import 'Pages/login.dart';
-import 'package:pikadart/pikadart.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  // Initialize Firebase
+  await Firebase.initializeApp();
+  //Reading the api key
+  Gemini.init(apiKey: 'AIzaSyBsvyh6-PXyQ_DIQXKp3sBd8p07ZVM28xs');
   runApp(const MyApp());
 }
 

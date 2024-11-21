@@ -11,10 +11,10 @@ class PokemonCard extends StatelessWidget {
   final AnimationController controller;
 
   const PokemonCard({
-    Key? key,
+    super.key,
     required this.pokemonResult,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

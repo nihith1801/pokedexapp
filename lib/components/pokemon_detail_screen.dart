@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../utils/string_utils.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 
 class PokemonDetailScreen extends StatefulWidget {
   final Map<String, dynamic> pokemon;
 
-  const PokemonDetailScreen({Key? key, required this.pokemon})
-      : super(key: key);
+  const PokemonDetailScreen({super.key, required this.pokemon});
 
   @override
   _PokemonDetailScreenState createState() => _PokemonDetailScreenState();
@@ -48,9 +47,10 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.mic),
-            onPressed: () {
-              _speak(
-                  "This is ${widget.pokemon['name']}. ${widget.pokemon['name']} is a Pokémon with ID number ${widget.pokemon['id']}.");
+            onPressed: () async {
+              String summary =
+                  await _getGeminiAISummary(widget.pokemon['name']);
+              _speak(summary);
             },
           ),
         ],
@@ -195,10 +195,9 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
       RadarChartData(
         radarShape: RadarShape.polygon,
         ticksTextStyle: const TextStyle(color: Colors.transparent),
-        radarBorderData: BorderSide(color: Colors.white, width: 2),
-        gridBorderData: BorderSide(color: Colors.white30, width: 1),
+        radarBorderData: const BorderSide(color: Colors.white, width: 2),
+        gridBorderData: const BorderSide(color: Colors.white30, width: 1),
         tickCount: 6,
-        // Adjusted to better fit Pokémon stats (0-255)
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 14),
         getTitle: (index, angle) {
           final stat = (widget.pokemon['stats'] as List)[index];
@@ -236,7 +235,7 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
   }
 
   Widget _buildStatBar(Map<String, dynamic> stat) {
-    const maxStat = 255.0; // Max possible base stat
+    const maxStat = 255.0;
     final baseStat = stat['base_stat'] as int;
     final percentage = baseStat / maxStat;
 
@@ -276,7 +275,7 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
         return Dialog(
           child: InteractiveViewer(
             panEnabled: true,
-            boundaryMargin: EdgeInsets.all(20),
+            boundaryMargin: const EdgeInsets.all(20),
             minScale: 0.5,
             maxScale: 4,
             child: CachedNetworkImage(
@@ -296,15 +295,23 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
   }
 
   Future<String> _getGeminiAISummary(String pokemonName) async {
-    const apiKey = 'API_KEY';
-    final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+    final gemini = Gemini.instance;
 
-    final prompt =
-        'Give me a brief summary of the Pokemon $pokemonName in about 3-4 sentences.';
+    // Updated prompt to be more descriptive and focused on text generation
+    final prompt = 'Describe the Pokémon $pokemonName in 1-2 lines';
 
-    final content = [Content.text(prompt)];
-    final response = await model.generateContent(content);
+    try {
+      final response = await gemini.text(prompt);
 
-    return response.text ?? 'Unable to generate summary.';
+      if (response == null) {
+        return 'Error: Response is null.';
+      }
+
+      return response.content?.parts?.last.text ??
+          'Unable to generate summary.';
+    } catch (e) {
+      print('Detailed error information: ${e.toString()}');
+      return 'Error generating summary: ${e.toString()}';
+    }
   }
 }

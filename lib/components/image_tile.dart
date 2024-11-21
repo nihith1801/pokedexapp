@@ -4,10 +4,10 @@ import 'package:lottie/lottie.dart';
 class ImageTile extends StatelessWidget {
   final String imagePath;
 
-  ImageTile({
-    Key? key,
+  const ImageTile({
+    super.key,
     required this.imagePath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

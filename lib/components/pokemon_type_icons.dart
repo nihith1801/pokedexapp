@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../PokeAPI/pokemon_types.dart';
-import '../utils/string_utils.dart';
 
 class PokemonTypeIcons extends StatelessWidget {
   final List<String> types;
 
-  const PokemonTypeIcons({Key? key, required this.types}) : super(key: key);
+  const PokemonTypeIcons({super.key, required this.types});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class PokemonTypeIcons extends StatelessWidget {
               ],
             ),
             child: SvgPicture.asset(
-              'assets/icons/Pokemon_Type_Icon_${capitalizeFirstLetter(type)}.svg',
+              'assets/icons/$type.svg',
               height: 25,
               width: 25,
               colorFilter: ColorFilter.mode(
